@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="icon_light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="icon_dark.png" media="(prefers-color-scheme: dark)">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sovereign Way Publishing – Formularz</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --text-primary: #ffffff;
+      --text-secondary: #b8b8b8;
+      --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.37);
+      --shadow-heavy: 0 15px 35px rgba(31, 38, 135, 0.2);
+      --border-radius: 20px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="light"] {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --glass-bg: rgba(255, 255, 255, 0.25);
+      --glass-border: rgba(255, 255, 255, 0.18);
+      --text-primary: #1a1a2e;
+      --text-secondary: #4a4a4a;
+      --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.15);
+      --shadow-heavy: 0 15px 35px rgba(31, 38, 135, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--dark-gradient);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+      overflow-x: hidden;
+      transition: var(--transition);
+    }
+
+    [data-theme="light"] body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(120, 200, 255, 0.1) 0%, transparent 50%);
+      z-index: -1;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-20px) rotate(0.5deg); }
+      66% { transform: translateY(10px) rotate(-0.5deg); }
+    }
+
+    /* Dark/Light mode toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      width: 60px;
+      height: 30px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 15px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+    }
+
+    .theme-toggle::before {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 24px;
+      height: 24px;
+      background: var(--primary-gradient);
+      border-radius: 50%;
+      transition: var(--transition);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    [data-theme="light"] .theme-toggle::before {
+      transform: translateX(30px);
+    }
+
+    /* Header */
+    .header {
+      max-width: 700px;
+      margin: 60px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius);
+      padding: 30px 40px;
+      box-shadow: var(--shadow-light);
+      animation: slideDown 0.8s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transition: var(--transition);
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .nav {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 16px;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-gradient);
+      transition: var(--transition);
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Main container */
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius);
+      padding: 40px;
+      box-shadow: var(--shadow-light);
+      position: relative;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Progress bar */
+    .progress-container {
+      margin-bottom: 30px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent-gradient);
+      width: 16.67%;
+      transition: width 0.5s ease;
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .progress-text {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* Typography */
+    h1 {
+      text-align: center;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5)); }
+      to { filter: drop-shadow(0 0 30px rgba(118, 75, 162, 0.8)); }
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--text-primary);
+    }
+
+    h4 {
+      text-align: center;
+      margin: 10px auto;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    /* Form elements */
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 14px;
+    }
+
+    input[type="text"], 
+    input[type="email"], 
+    textarea, 
+    select {
+      width: 100%;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      font-size: 16px;
+      color: var(--text-primary);
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    input:focus, 
+    textarea:focus, 
+    select:focus {
+      outline: none;
+      border-color: rgba(102, 126, 234, 0.6);
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      transform: translateY(-2px);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--text-secondary);
+    }
+
+    /* Buttons */
+    button {
+      padding: 14px 28px;
+      background: var(--primary-gradient);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      margin-right: 10px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    button:hover::before {
+      left: 100%;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Loading state */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Section transitions */
+    .section {
+      display: none;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .buttons {
+      text-align: right;
+      margin-top: 30px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+    }
+
+    /* About section */
+    .about-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-text {
+      animation: slideInLeft 0.8s ease-out;
+    }
+
+    .about-image {
+      animation: slideInRight 0.8s ease-out;
+      text-align: center;
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .about-image img {
+      max-width: 100%;
+      height: auto;
+      max-height: 440px;
+      border-radius: 15px;
+      object-fit: contain;
+      transition: var(--transition);
+      box-shadow: var(--shadow-light);
+    }
+
+    .about-image img:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    /* FAQ Button */
+    .faq-button {
+      max-width: 742px;
+      margin: 40px auto;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(102, 126, 234, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0); }
+    }
+
+    .faq-button a {
+      display: block;
+      width: 100%;
+      padding: 16px 0;
+      background: var(--secondary-gradient);
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 18px;
+      transition: var(--transition);
+      box-shadow: var(--shadow-light);
+    }
+
+    .faq-button a:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    /* Reviews section */
+    .reviews-section {
+      max-width: 742px;
+      margin: 40px auto;
+      padding: 0 40px;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .review-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: var(--shadow-light);
+      transition: var(--transition);
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .review-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .stars {
+      color: #FFD700;
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    .reviewer-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 15px;
+      border: 3px solid rgba(102, 126, 234, 0.5);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .reviewer-name {
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+    }
+
+    .reviewer-location {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .review-text {
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--text-primary);
+    }
+
+    /* Books carousel */
+    .books-section {
+      max-width: 742px;
+      margin: 40px auto;
+      padding: 0 40px;
+      position: relative;
+    }
+
+    .carousel-container {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    .carousel {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .book-item {
+      flex: 0 0 auto;
+      width: 160px;
+      text-align: center;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      margin: 0 10px;
+    }
+
+    .book-item img {
+      height: 240px;
+      border-radius: 8px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      object-fit: cover;
+      width: 100%;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .book-item:hover img {
+      transform: scale(1.05) rotateY(5deg);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .book-title {
+      margin-top: 15px;
+      color: var(--text-primary);
+      font-weight: 600;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .book-item.active .book-title {
+      opacity: 1;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: var(--transition);
+      color: var(--text-primary);
+      font-size: 20px;
+    }
+
+    .carousel-arrow:hover {
+      background: var(--primary-gradient);
+      color: white;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-arrow.left {
+      left: 20px;
+    }
+
+    .carousel-arrow.right {
+      right: 20px;
+    }
+
+    /* Contact */
+    .contact-info {
+      text-align: center;
+      color: var(--text-secondary);
+      margin: 20px 0;
+    }
+
+    .contact-info a {
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .contact-info a:hover {
+      color: #667eea;
+    }
+
+    /* Messenger button */
+    .messenger-btn {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 999;
+      width: 60px;
+      height: 60px;
+      background: var(--secondary-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
+      transition: var(--transition);
+      text-decoration: none;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .messenger-btn:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 15px 35px rgba(245, 87, 108, 0.5);
+    }
+
+    .messenger-btn i {
+      font-size: 24px;
+      color: white;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 25px;
+        margin-top: 80px;
+      }
+
+      .nav {
+        gap: 20px;
+      }
+
+      .container {
+        padding: 25px;
+        margin: 25px auto;
+      }
+
+      .about-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .carousel-arrow {
+        display: none;
+      }
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-gradient);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--secondary-gradient);
+    }
+
+    /* Selection */
+    ::selection {
+      background: rgba(102, 126, 234, 0.3);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- Theme toggle -->
+  <div class="theme-toggle" onclick="toggleTheme()"></div>
+
+  <h1>Sovereign Way Publishing</h1>
+  
+  <div class="container">
+    <!-- Progress bar -->
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text" id="progressText">Krok 1 z 6</div>
+    </div>
+
+    <form id="contactForm">
+      <input type="hidden" name="selected_path" id="selected_path">
+      <p style="display:none">
+        <label>Nie wypełniaj tego pola: <input name="bot-field"></label>
+      </p>
+      
+      <!-- Sekcja 1/6 -->
+      <div id="section1" class="section active">
+        <h2>Umów się na stworzenie książki</h2>
+        
+        <label>Adres email</label>
+        <input type="email" name="email" required placeholder="twoj@email.com" />
+        
+        <label>Imię i nazwisko</label>
+        <input type="text" name="fullname" required placeholder="Jan Kowalski" />
+        
+        <label>Stan projektu</label>
+        <select name="stan_projektu" id="stan_projektu" required>
+          <option value="" disabled selected>Wybierz opcję</option>
+          <option value="new">Nie mam gotowej książki – nie mam jeszcze nic / mam pomysł / mam okładkę</option>
+          <option value="manuscript">Mam gotowy manuskrypt, ale nie mam okładki</option>
+          <option value="almost">Mam prawie gotową książkę – mam okładkę, tytuł i manuskrypt do sformatowania</option>
+          <option value="ready">Mam książkę gotową do publikacji – mam gotową okładkę, tytuł i manuskrypt</option>
+          <option value="message">Przejdź od razu do wiadomości</option>
+        </select>
+      </div>
+
+      <!-- Sekcja 2/6 -->
+      <div id="new" class="section">
+        <h2>Co dalej?</h2>
+        <label><strong>Typ usługi</strong></label>
+        <p>Sposób, w jaki będzie napisana Twoja książka</p>
+        <p><strong>Biografia opowiadana</strong> – Chcę, aby moja biografia była napisana w formie swobodnej, jak opowieść mówiona moimi słowami (z zachowaniem stylu mówienia oraz powiedzonek).</p>
+        <p><strong>Biografia literacka</strong> – Chcę, aby moja biografia była napisana jak profesjonalna książka.</p>
+        <select name="typ_biografii">
+          <option value="" disabled selected>Wybierz typ</option>
+          <option value="Biografia opowiadana">Biografia opowiadana</option>
+          <option value="Biografia literacka">Biografia literacka</option>
+          <option value="Inna">Inna odpowiedź (uwzględnij w wiadomości na końcu)</option>
+        </select>
+
+        <label>Okładka książki</label>
+        <p>(Cena całkowitego projektu różni się w zależności od tego wyboru)</p>
+        <select name="okladka_ksiazki">
+          <option value="" disabled selected>Wybierz opcję</option>
+          <option value="Mam gotową okładkę">Mam gotową okładkę</option>
+          <option value="Mam pomysł – chcę otrzymać 20+ projektów">Mam pomysł – chcę otrzymać 20+ projektów</option>
+          <option value="Mam pomysł – chcę tylko jeden projekt">Mam pomysł – chcę tylko jeden projekt</option>
+          <option value="Nie mam pomysłu – chcę otrzymać 20+ projektów">Nie mam pomysłu – chcę otrzymać 20+ projektów</option>
+          <option value="Nie mam pomysłu – chcę tylko jeden projekt">Nie mam pomysłu – chcę tylko jeden projekt</option>
+        </select>
+
+        <label>Typ oprawy książki</label>
+        <p>Wybór typu oprawy nie wpływa na cenę projektu, ale ma znaczenie przy zakupie fizycznych egzemplarzy (twarda oprawa jest droższa).</p>
+        <select name="typ_oprawy">
+          <option value="" disabled selected>Wybierz opcję</option>
+          <option value="Miękka oprawa">Miękka oprawa</option>
+          <option value="Twarda oprawa">Twarda oprawa</option>
+        </select>
+        <label>Czy chcesz, aby w książce znalazły się ilustracje lub obrazy?</label>
+        <select name="ilustracje">
+          <option value="" disabled selected>Wybierz opcję</option>
+          <option value="Tak">Tak</option>
+          <option value="Nie">Nie</option>
+        </select>
+      </div>
+
+      <!-- Sekcja 3/6 -->
+      <div id="message" class="section">
+        <h2>Prawie gotowe...</h2>
+        <label>Napisz wiadomość</label>
+        <p>Tutaj możesz wpisać dodatkowe uwagi, pytania lub szczegóły, które powinniśmy znać przed kontaktem z Tobą. Na przykład: wyjątkowe życzenia co do stylu książki, pomysły na tytuł lub wszystko, co uznasz za ważne. (Więcej pytań o proces współpracy prosimy kierować na maila sovereign.way@hotmail.com).</p>
+        <textarea name="wiadomosc" rows="6" placeholder="Twoja wiadomość..."></textarea>
+      </div>
+
+      <!-- Sekcja 4/6 -->
+      <div id="ready" class="section">
+        <h2>Co dalej?</h2>
+        <label>Typ oprawy książki</label>
+        <p>Wybór typu oprawy nie wpływa na cenę projektu, ale ma znaczenie przy zakupie fizycznych egzemplarzy (twarda oprawa jest droższa).</p>
+        <select name="typ_oprawy">
+          <option value="" disabled selected>Wybierz opcję</option>
+          <option value="Miękka oprawa">Miękka oprawa</option>
+          <option value="Twarda oprawa">Twarda oprawa</option>
+        </select>
+
+        <label>Czy w Twojej książce są ilustracje lub obrazy?</label>
+        <select name="ilustracje">
+          <option value="" disabled selected>Wybierz opcję</option>
+          <option value="Tak, w manuskrypcie są zdjęcia">Tak, w manuskrypcie są zdjęcia</option>
+          <option value="Nie, w manuskrypcie nie ma zdjęć">Nie, w manuskrypcie nie ma zdjęć</option>
+        </select>
+      </div>
+
+      <!-- Sekcja 5/6 -->
+      <div id="manuscript" class="section">
+        <h2>Mam gotowy manuskrypt, ale nie mam okładki...</h2>
+        <label>Okładka książki</label>
+        <p>(Cena całkowitego projektu różni się w zależności od tego wyboru)</p>
+        <select name="okladka_ksiazki">
+          <option value="" disabled selected>Wybierz opcję</option>
+          <option value="Mam pomysł – chcę otrzymać 20+ projektów">Mam pomysł – chcę otrzymać 20+ projektów</option>
+          <option value="Mam pomysł – chcę tylko jeden projekt">Mam pomysł – chcę tylko jeden projekt</option>
+          <option value="Nie mam pomysłu – chcę otrzymać 20+ projektów">Nie mam pomysłu – chcę otrzymać 20+ projektów</option>
+          <option value="Nie mam pomysłu – chcę tylko jeden projekt">Nie mam pomysłu – chcę tylko jeden projekt</option>
+        </select>
+
+        <label>Typ oprawy książki</label>
+        <p>Wybór typu oprawy nie wpływa na cenę projektu, ale ma znaczenie przy zakupie fizycznych egzemplarzy (twarda oprawa jest droższa).</p>
+        <select name="typ_oprawy">
+          <option value="" disabled selected>Wybierz opcję</option>
+          <option value="Miękka oprawa">Miękka oprawa</option>
+          <option value="Twarda oprawa">Twarda oprawa</option>
+        </select>
+
+        <label>Czy w manuskrypcie Twojej książki są obrazy?</label>
+        <select name="ilustracje">
+          <option value="" disabled selected>Wybierz opcję</option>
+          <option value="Tak">Tak</option>
+          <option value="Nie">Nie</option>
+        </select>
+      </div>
+
+      <!-- Sekcja 6/6 -->
+      <div id="almost" class="section">
+        <h2>Mam prawie gotową książkę...</h2>
+        <p>W wiadomości na końcu możesz uwzględnić szczegóły formatowania tekstu w manuskrypcie.</p>
+        
+        <label>Typ oprawy książki</label>
+        <p>Wybór typu oprawy nie wpływa na cenę projektu, ale ma znaczenie przy zakupie fizycznych egzemplarzy (twarda oprawa jest droższa).</p>
+        <select name="typ_oprawy">
+          <option value="" disabled selected>Wybierz opcję</option>
+          <option value="Miękka oprawa">Miękka oprawa</option>
+          <option value="Twarda oprawa">Twarda oprawa</option>
+        </select>
+
+        <label>Czy w manuskrypcie Twojej książki są obrazy?</label>
+        <select name="ilustracje">
+          <option value="" disabled selected>Wybierz opcję</option>
+          <option value="Tak">Tak</option>
+          <option value="Nie">Nie</option>
+        </select>
+      </div>
+
+      <div class="buttons">
+        <button type="button" id="prevBtn" onclick="prevSection()" style="display:none;">
+          <i class="fas fa-arrow-left"></i> Wstecz
+        </button>
+        <button type="button" id="nextBtn" onclick="nextSection()">
+          Dalej <i class="fas fa-arrow-right"></i>
+        </button>
+        <button type="submit" id="submitBtn" style="display:none;">
+          <i class="fas fa-paper-plane"></i> Wyślij
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- About section -->
+  <div class="container">
+    <h2>Przedłużymy Twoje życie o pokolenia</h2>
+    <div class="about-container">
+      <div class="about-text">
+        <p><i>"Nie wszystek umrę"</i> (łac. <i>non omnis moriar</i>) – <span style="font-weight: 650;">Człowiek żyje, dopóki pamięć o nim trwa.</span></p>
+        <label>Twoje doświadczenia, wybory, wspomnienia i refleksje — to coś, czego nikt nie zdoła przekazać potomkom słownie.
+<a href="#biografie" id="biografia-link" style="font-style: italic; text-decoration: underline; color: #4facfe; cursor: pointer;">Taka biografia</a> to wyjątkowy sposób, by opowiedzieć bliskim o swoim życiu.<br><br>Dla dzieci, wnuków, prawnuków. Żeby wiedzieli, kim byłeś, jak wyglądały Twoje czasy, co przeżyłeś i co było dla Ciebie ważne.<br><br>Wszystko inne może zniknąć w sekundzie — cyfrowe zdjęcia, nagrania i profile w internecie.<br>A biografia, w formie książki na półce, przetrwa wieki.<br><br>
+To piękny prezent dla rodziny. I ogromna pamiątka, która zostanie na pokolenia.</label>
+      </div>
+      <div class="about-image">
+        <img src="grdnt.png" alt="gradient photo">
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Button -->
+  <div class="faq-button">
+    <a href="/faq">
+      <i class="fas fa-question-circle"></i> FAQ – Najczęstsze pytania
+    </a>
+  </div>
+
+  <!-- Reviews section -->
+  <div class="reviews-section">
+    <h2 style="text-align: center; margin-bottom: 30px; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Opinie naszych klientów</h2>
+    
+    <div class="reviews-grid">
+      <!-- Real review -->
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <img src="mikolaj_kormakow_review.png" alt="Mikołaj Kormakow" class="reviewer-image">
+        <h3 class="reviewer-name">Mikołaj Kormakow</h3>
+        <p class="reviewer-location">Dolnośląskie, PL</p>
+        <p class="review-text">"Jestem ogromnie wdzięczny wydawnictwu Sovereign Way za ten zupełnie niespodziewany prezent.
+Tekst został napisany bardzo profesjonalnie – nie przesadzam stwierdzając, że stworzył go doświadczony publicysta. Tym bardziej zadziwia fakt, że tak niewiele informacji o mnie jest ogólnodostępnych. Żeby zebrać odpowiednie dane, a potem tak zwięźle i trafnie je przedstawić, naprawdę trzeba mieć talent.
+Uważam <a href="https://amzn.eu/d/fOspbwE" target="_blank" style="color: #4facfe; text-decoration: underline;">swoją biografię</a> za wyjątkowo udaną.
+Z całego serca polecam tę usługę każdemu, kto chciałby zostawić po sobie trwałą pamiątkę dla rodziny i bliskich – to naprawdę <b>najlepszy prezent</b>."</p>
+      </div>
+      
+      <!-- Placeholder review -->
+      <div class="review-card" style="display: flex; flex-direction: column; justify-content: center; min-height: 200px;">
+        <div class="stars" style="color: #888;">★★★★★</div>
+        <h3 style="color: var(--text-secondary);">Tu może być Twoja opinia...</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Books carousel -->
+  <div class="books-section" id="biografie">
+    <h2 style="text-align: center; margin-bottom: 30px; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Biografie naszych klientów</h2>
+    
+    <div class="carousel-container">
+      <div class="carousel-arrow left" id="arrow-left">❮</div>
+      <div class="carousel" id="book-carousel"></div>
+      <div class="carousel-arrow right" id="arrow-right">❯</div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="container">
+    <div class="contact-info">
+      <h4>
+        <i class="fas fa-envelope"></i> sovereign.way@hotmail.com | 
+        <a href="https://www.facebook.com/sovereignwaypublishing" target="_blank">
+          <i class="fab fa-facebook"></i> Facebook
+        </a>
+      </h4>
+    </div>
+  </div>
+
+  <p style="font-size: 14px; text-align: center; color: var(--text-secondary); margin: 40px 0;">© 2025 Sovereign Way Publishing</p>
+
+  <!-- Messenger button -->
+  <a href="https://m.me/SovereignWayPublishing" target="_blank" class="messenger-btn">
+    <i class="fab fa-facebook-messenger"></i>
+  </a>
+
+  <script>
+    // Theme toggle functionality
+    function toggleTheme() {
+      const body = document.body;
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      
+      body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    }
+
+    // Load saved theme
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.body.setAttribute('data-theme', savedTheme);
+    });
+
+    // Progress bar functionality
+    const progressSteps = {
+      'section1': { step: 1, width: '16.67%' },
+      'new': { step: 2, width: '33.33%' },
+      'manuscript': { step: 2, width: '33.33%' },
+      'almost': { step: 2, width: '33.33%' },
+      'ready': { step: 2, width: '33.33%' },
+      'message': { step: 6, width: '100%' }
+    };
+
+    function updateProgress(sectionId) {
+      const progress = progressSteps[sectionId];
+      if (progress) {
+        document.getElementById('progressFill').style.width = progress.width;
+        document.getElementById('progressText').textContent = `Krok ${progress.step} z 6`;
+      }
+    }
+
+    // Navigation functionality
+    let historyStack = [];
+
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      const target = document.getElementById(id);
+      if (target) {
+        target.classList.add('active');
+        updateProgress(id);
+      }
+
+      if (id !== 'section1') {
+        document.getElementById('selected_path').value = id;
+      }
+
+      document.getElementById('prevBtn').style.display = historyStack.length > 0 ? 'inline-block' : 'none';
+      document.getElementById('nextBtn').style.display = id === 'message' ? 'none' : 'inline-block';
+      document.getElementById('submitBtn').style.display = id === 'message' ? 'inline-block' : 'none';
+    }
+
+    function nextSection() {
+      const current = document.querySelector('.section.active');
+      const currentId = current.id;
+
+      if (currentId === 'section1') {
+        const selected = document.getElementById('stan_projektu').value;
+        if (selected) {
+          historyStack.push(currentId);
+          showSection(selected);
+        }
+      } else {
+        historyStack.push(currentId);
+        showSection('message');
+      }
+    }
+
+    function prevSection() {
+      if (historyStack.length > 0) {
+        const previousId = historyStack.pop();
+        showSection(previousId);
+      }
+    }
+
+    // Form submission with loading state
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const submitBtn = document.getElementById('submitBtn');
+      
+      // Add loading state
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="loading"></span>Wysyłanie...';
+
+      try {
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => {
+          if (key !== 'bot-field' && key !== 'selected_path') {
+            data[key] = value;
+          }
+        });
+
+        const SUPABASE_URL = 'https://thnjczxwtpbnuhxnurcr.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRobmpjenh3dHBibnVoeG51cmNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc5MzI0NjEsImV4cCI6MjA2MzUwODQ2MX0.UIEydgLg7nOboK2tQW6dfFEsODArbojSkhokwo2fCvg';
+
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/form_submissions`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.message || 'Błąd serwera');
+        }
+
+        // Success animation
+        submitBtn.innerHTML = '<i class="fas fa-check"></i> Wysłano!';
+        setTimeout(() => {
+          alert('Formularz wysłany! Dziękujemy!');
+          form.reset();
+          showSection('section1');
+          historyStack = [];
+        }, 1000);
+
+      } catch (error) {
+        alert(`Wystąpił błąd: ${error.message || 'Spróbuj ponownie lub skontaktuj się z nami.'}`);
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Wyślij';
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+
+    // Books carousel functionality
+    const booksData = [
+      { src: 'twoja_ksiazka.png', title: 'Twoja książka', link: '' },
+      { src: 'biografia_kormakowa_pl.png', title: 'Kormakow PL', link: 'https://amzn.eu/d/fOspbwE' },
+      { src: 'biografia_kormakowa_en.png', title: 'Kormakow EN', link: 'https://amzn.eu/d/cmzMz1w' }
+    ];
+
+    let currentBookIndex = 0;
+    const carousel = document.getElementById('book-carousel');
+    const arrowLeft = document.getElementById('arrow-left');
+    const arrowRight = document.getElementById('arrow-right');
+
+    function initCarousel() {
+      booksData.forEach((book, index) => {
+        const bookElement = document.createElement('div');
+        bookElement.className = 'book-item';
+        if (index === 0) bookElement.classList.add('active');
+        
+        const img = document.createElement('img');
+        img.src = book.src;
+        img.alt = book.title;
+        
+        const title = document.createElement('p');
+        title.textContent = book.title;
+        title.className = 'book-title';
+        
+        bookElement.appendChild(img);
+        bookElement.appendChild(title);
+        carousel.appendChild(bookElement);
+        
+        bookElement.addEventListener('click', () => handleBookClick(index));
+      });
+      
+      updateCarousel();
+      updateArrows();
+      centerSelectedBook();
+    }
+
+    function updateCarousel() {
+      const books = document.querySelectorAll('.book-item');
+      books.forEach((book, index) => {
+        book.classList.toggle('active', index === currentBookIndex);
+        const distance = Math.abs(index - currentBookIndex);
+        const scale = 1 - (distance * 0.1);
+        book.style.transform = `scale(${scale})`;
+        book.style.zIndex = 10 - distance;
+      });
+    }
+
+    function centerSelectedBook() {
+      const containerWidth = carousel.parentElement.offsetWidth;
+      const bookWidth = 180;
+      const targetPosition = (containerWidth / 2) - (currentBookIndex * bookWidth) - (bookWidth / 2);
+      carousel.style.transform = `translateX(${targetPosition}px)`;
+    }
+
+    function handleBookClick(index) {
+      if (index === currentBookIndex) {
+        if (index === 0) {
+          window.scrollTo({top: 0, behavior: 'smooth'});
+        } else if (booksData[index].link) {
+          window.open(booksData[index].link, '_blank');
+        }
+      } else {
+        currentBookIndex = index;
+        updateCarousel();
+        updateArrows();
+        centerSelectedBook();
+      }
+    }
+
+    function moveCarousel(direction) {
+      currentBookIndex = (currentBookIndex + direction + booksData.length) % booksData.length;
+      updateCarousel();
+      updateArrows();
+      centerSelectedBook();
+    }
+
+    function updateArrows() {
+      arrowLeft.style.display = currentBookIndex === 0 ? 'none' : 'flex';
+      arrowRight.style.display = currentBookIndex === booksData.length - 1 ? 'none' : 'flex';
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+      initCarousel();
+      updateProgress('section1');
+      
+      arrowLeft.addEventListener('click', () => moveCarousel(-1));
+      arrowRight.addEventListener('click', () => moveCarousel(1));
+      
+      // Touch support for carousel
+      let touchStartX = 0;
+      let touchEndX = 0;
+      
+      carousel.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].clientX;
+      }, { passive: true });
+      
+      carousel.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].clientX;
+        if (touchEndX < touchStartX - 50) moveCarousel(1);
+        if (touchEndX > touchStartX + 50) moveCarousel(-1);
+      }, { passive: true });
+      
+      // Smooth scroll to biographies
+      document.getElementById('biografia-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('biografie').scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    // Add entrance animations on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, observerOptions);
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.container, .reviews-section, .books-section').forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>

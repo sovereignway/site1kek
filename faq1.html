@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="c9bd0de1-53ae-4ee6-bd0f-f24d1068402f"></script>
+  <link rel="icon" href="icon_light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="icon_dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sovereign Way Publishing – FAQ</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --text-primary: #ffffff;
+      --text-secondary: #b8b8b8;
+      --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.37);
+      --shadow-heavy: 0 15px 35px rgba(31, 38, 135, 0.2);
+      --border-radius: 20px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="light"] {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --glass-bg: rgba(255, 255, 255, 0.25);
+      --glass-border: rgba(255, 255, 255, 0.18);
+      --text-primary: #1a1a2e;
+      --text-secondary: #4a4a4a;
+      --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.15);
+      --shadow-heavy: 0 15px 35px rgba(31, 38, 135, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--dark-gradient);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+      overflow-x: hidden;
+      transition: var(--transition);
+    }
+
+    [data-theme="light"] body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(120, 200, 255, 0.1) 0%, transparent 50%);
+      z-index: -1;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-20px) rotate(0.5deg); }
+      66% { transform: translateY(10px) rotate(-0.5deg); }
+    }
+
+    /* Dark/Light mode toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      width: 60px;
+      height: 30px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 15px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+    }
+
+    .theme-toggle::before {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 24px;
+      height: 24px;
+      background: var(--primary-gradient);
+      border-radius: 50%;
+      transition: var(--transition);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    [data-theme="light"] .theme-toggle::before {
+      transform: translateX(30px);
+    }
+
+    /* Main container */
+    .container {
+      max-width: 1200px;
+      margin: 80px auto 40px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius);
+      padding: 60px 40px;
+      box-shadow: var(--shadow-light);
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 50px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5)); }
+      to { filter: drop-shadow(0 0 30px rgba(118, 75, 162, 0.8)); }
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+
+    .faq-item {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: var(--shadow-light);
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .faq-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+      transition: left 0.5s;
+    }
+
+    .faq-item:hover::before {
+      left: 100%;
+    }
+
+    .faq-item:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-heavy);
+      border-color: rgba(102, 126, 234, 0.3);
+    }
+
+    .faq-item.active {
+      background: rgba(102, 126, 234, 0.1);
+      border-color: rgba(102, 126, 234, 0.4);
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.4;
+      gap: 15px;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-top: 0;
+      color: var(--text-secondary);
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 600px;
+      margin-top: 20px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .faq-answer a {
+      color: #4facfe;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .faq-answer a:hover {
+      color: #667eea;
+      text-decoration: underline;
+    }
+
+    .arrow {
+      font-size: 18px;
+      transition: var(--transition);
+      color: var(--accent-gradient);
+      flex-shrink: 0;
+      width: 20px;
+      text-align: center;
+    }
+
+    .faq-item.active .arrow {
+      transform: rotate(180deg);
+      color: #4facfe;
+    }
+
+    .back-button {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back-button a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: var(--primary-gradient);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      transition: var(--transition);
+      box-shadow: var(--shadow-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .back-button a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .back-button a:hover::before {
+      left: 100%;
+    }
+
+    .back-button a:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    /* Search functionality */
+    .search-container {
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 16px 50px 16px 20px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      font-size: 16px;
+      color: var(--text-primary);
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: rgba(102, 126, 234, 0.6);
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      pointer-events: none;
+    }
+
+    /* FAQ stats */
+    .faq-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 20px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      min-width: 120px;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-top: 5px;
+    }
+
+    /* No results message */
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-secondary);
+      display: none;
+    }
+
+    .no-results.show {
+      display: block;
+    }
+
+    /* Responsive design */
+    @media (max-width: 1024px) {
+      .faq-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 60px auto 20px;
+        padding: 30px 20px;
+      }
+      
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .faq-question {
+        font-size: 15px;
+      }
+
+      .faq-stats {
+        gap: 20px;
+      }
+
+      .stat-item {
+        min-width: 100px;
+        padding: 15px;
+      }
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-gradient);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--secondary-gradient);
+    }
+
+    /* Selection */
+    ::selection {
+      background: rgba(102, 126, 234, 0.3);
+      color: white;
+    }
+
+    /* Animation delays for stagger effect */
+    .faq-item:nth-child(1) { animation-delay: 0.1s; }
+    .faq-item:nth-child(2) { animation-delay: 0.2s; }
+    .faq-item:nth-child(3) { animation-delay: 0.3s; }
+    .faq-item:nth-child(4) { animation-delay: 0.4s; }
+    .faq-item:nth-child(5) { animation-delay: 0.5s; }
+    .faq-item:nth-child(6) { animation-delay: 0.6s; }
+    .faq-item:nth-child(7) { animation-delay: 0.7s; }
+    .faq-item:nth-child(8) { animation-delay: 0.8s; }
+    .faq-item:nth-child(9) { animation-delay: 0.9s; }
+
+    .faq-item {
+      animation: fadeInUp 0.6s ease-out both;
+    }
+  </style>
+</head>
+<body>
+  <!-- Theme toggle -->
+  <div class="theme-toggle" onclick="toggleTheme()"></div>
+
+  <h1><i class="fas fa-question-circle"></i> Sovereign Way Publishing - FAQ</h1>
+  
+  <div class="container">
+    <!-- FAQ Stats -->
+    <div class="faq-stats">
+      <div class="stat-item">
+        <div class="stat-number" id="totalQuestions">9</div>
+        <div class="stat-label">Pytań</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="avgTime">~4</div>
+        <div class="stat-label">Tygodnie</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">2500</div>
+        <div class="stat-label">zł od</div>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-container">
+      <input type="text" class="search-input" id="searchInput" placeholder="Szukaj w FAQ... (np. 'czas realizacji', 'cena')">
+      <i class="fas fa-search search-icon"></i>
+    </div>
+
+    <div class="faq-grid" id="faqGrid">
+      <!-- FAQ Items -->
+      <div class="faq-item" data-keywords="czas realizacja długo trwa proces">
+        <div class="faq-question">
+          Jak długo trwa proces tworzenia książki?
+          <span class="arrow">↓</span>
+        </div>
+        <div class="faq-answer">
+          Czas realizacji zależy od zakresu pracy. Standardowa biografia zajmuje <strong>4-8 tygodni</strong> od zebrania wszystkich materiałów. Najbardziej czasochłonne jest nagranie historii oraz redakcja tekstu. W przypadku pilnych zleceń możemy przyspieszyć proces - prosimy o kontakt w celu omówienia szczegółów.
+        </div>
+      </div>
+      
+      <div class="faq-item" data-keywords="zmiany poprawki edycja modyfikacja">
+        <div class="faq-question">
+          Czy można wprowadzać zmiany w trakcie procesu?
+          <span class="arrow">↓</span>
+        </div>
+        <div class="faq-answer">
+          Oczywiście! W cenie zawarte są <strong>2 rundy poprawek</strong> – po stworzeniu wersji roboczej oraz przed finalizacją projektu. Dodatkowe zmiany są możliwe za dopłatą. Zachęcamy do aktywnego udziału w procesie tworzenia, aby końcowy rezultat w pełni odpowiadał Twoim oczekiwaniom.
+        </div>
+      </div>
+      
+      <div class="faq-item" data-keywords="proces współpraca etapy kroki standardowy">
+        <div class="faq-question">
+          <span>Jak wygląda proces standardowej* współpracy?</span>
+          <span class="arrow">↓</span>
+        </div>
+        <div class="faq-answer">
+          <strong>Etapy współpracy:</strong><br>
+          1. <a href="/" style="color: #4facfe; text-decoration: underline;">Wypełnienie formularza</a><br>
+          2. Konsultacja wstępna<br>
+          3. Podpisanie umowy i wpłata zaliczki<br>
+          4. Nagranie historii<br>
+          5. Tworzenie wersji roboczej<br>
+          6. Recenzja i wprowadzenie poprawek<br>
+          7. Finalizacja projektu<br>
+          8. Podpisanie protokołu odbioru<br>
+          9. Wydanie książki i wpłata końcowa<br><br>
+          <em>* – proces współpracy różni się w zależności od preferencji klienta omawianych podczas konsultacji wstępnej</em>
+        </div>
+      </div>
+
+      <div class="faq-item" data-keywords="druk egzemplarze kopie nakład wydruk">
+        <div class="faq-question">
+          Czy mogę wydrukować tylko kilka egzemplarzy?
+          <span class="arrow">↓</span>
+        </div>
+        <div class="faq-answer">
+          Tak, możesz zamówić <strong>tyle kopii ile zechcesz</strong> - nawet pojedyncze egzemplarze. Druk realizowany jest przez Amazon Print-on-Demand, więc nie ma minimalnego nakładu. Istnieje również możliwość zamówienia tylko pliku PDF do druku, aby wydrukować książkę we własnym zakresie w lokalnej drukarni.
+        </div>
+      </div>
+      
+      <div class="faq-item" data-keywords="format rozmiar książka A5 B5 ebook pdf epub">
+        <div class="faq-question">
+          Jakie formaty książek oferujecie?
+          <span class="arrow">↓</span>
+        </div>
+        <div class="faq-answer">
+          Standardowy format ma wymiary <strong>6 x 9 cali (≈15 x 22 cm)</strong>, zarówno w miękkiej jak i twardej oprawie. To popularny format biografii, który świetnie się czyta i wygląda profesjonalnie na półce. Możemy też przygotować jedynie wersję elektroniczną w formacie PDF wysokiej jakości, gotową do druku w dowolnej drukarni.
+        </div>
+      </div>
+      
+      <div class="faq-item" data-keywords="dystrybucja sprzedaż amazon dostawa wysyłka">
+        <div class="faq-question">
+          Czy zajmujecie się dystrybucją książek?
+          <span class="arrow">↓</span>
+        </div>
+        <div class="faq-answer">
+          Tak! Realizacja dostawy odbywa się za pośrednictwem <strong>Amazon Print-on-Demand</strong>. Po złożeniu zamówienia wydrukowane książki mogą dotrzeć nawet w ciągu <strong>2 dni roboczych</strong> na terenie całej Polski. System Amazon gwarantuje wysoką jakość druku i profesjonalne wykończenie. Możliwa jest również dostawa międzynarodowa.
+        </div>
+      </div>
+      
+      <div class="faq-item" data-keywords="materiały zdjęcia dokumenty nagrania historia">
+        <div class="faq-question">
+          Jakie materiały są potrzebne do stworzenia biografii?
+          <span class="arrow">↓</span>
+        </div>
+        <div class="faq-answer">
+          Głównym źródłem najczęściej są <strong>nagrania historii Twojego życia</strong>, które razem przeprowadzimy podczas sesji online lub osobistych spotkań. Przydatne są również zdjęcia, dokumenty, listy, pamiętniki i inne materiały, które pomogą wzbogacić opowieść. Nie martw się jeśli nie masz wszystkiego - pomożemy Ci zebrać potrzebne informacje.
+        </div>
+      </div>
+      
+      <div class="faq-item" data-keywords="anonimowość pseudonim prywatność dyskrecja">
+        <div class="faq-question">
+          Czy mogę zachować anonimowość?
+          <span class="arrow">↓</span>
+        </div>
+        <div class="faq-answer">
+          Tak, możesz wydać książkę pod <strong>pseudonimem</strong> lub zachować pełną anonimowość. Wszystkie szczegóły omawiamy indywidualnie i podpisujemy odpowiednie klauzule poufności. Zrozumiemy też, jeśli niektóre fragmenty życia wolisz pozostawić poza książką - Twoja prywatność jest dla nas najważniejsza.
+        </div>
+      </div>
+      
+      <div class="faq-item" data-keywords="cena koszt wycena ile kosztuje cennik">
+        <div class="faq-question">
+          Jak wyceniacie swoje usługi?
+          <span class="arrow">↓</span>
+        </div>
+        <div class="faq-answer">
+          Cena zależy od zakresu pracy (np. pisanie od podstaw vs. redakcja istniejącego tekstu), ilości stron, projektu okładki, nakładu i ewentualnych zniżek. <strong>Podstawowa biografia zaczyna się od 2500 zł</strong> i obejmuje kompletną usługę: wywiady, napisanie książki, projekt okładki i przygotowanie do druku. Dokładną wycenę otrzymasz po wypełnieniu formularza i konsultacji.
+        </div>
+      </div>
+    </div>
+
+    <!-- No results message -->
+    <div class="no-results" id="noResults">
+      <i class="fas fa-search" style="font-size: 48px; color: var(--text-secondary); margin-bottom: 20px;"></i>
+      <h3>Nie znaleziono wyników</h3>
+      <p>Spróbuj użyć innych słów kluczowych lub <a href="mailto:sovereign.way@hotmail.com" style="color: #4facfe;">skontaktuj się z nami</a> bezpośrednio.</p>
+    </div>
+    
+    <div class="back-button">
+      <a href="/">
+        <i class="fas fa-arrow-left"></i>
+        Powrót do strony głównej
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Theme toggle functionality
+    function toggleTheme() {
+      const body = document.body;
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      
+      body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    }
+
+    // Load saved theme
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.body.setAttribute('data-theme', savedTheme);
+    });
+
+    // FAQ accordion functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.parentElement;
+        const wasActive = item.classList.contains('active');
+        
+        // Close all other items
+        document.querySelectorAll('.faq-item').forEach(faqItem => {
+          faqItem.classList.remove('active');
+        });
+        
+        // Toggle current item
+        if (!wasActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    const faqGrid = document.getElementById('faqGrid');
+    const noResults = document.getElementById('noResults');
+    const totalQuestions = document.getElementById('totalQuestions');
+
+    searchInput.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase().trim();
+      const faqItems = document.querySelectorAll('.faq-item');
+      let visibleCount = 0;
+
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question').textContent.toLowerCase();
+        const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+        const keywords = item.getAttribute('data-keywords').toLowerCase();
+        
+        const isVisible = question.includes(searchTerm) || 
+                         answer.includes(searchTerm) || 
+                         keywords.includes(searchTerm);
+        
+        if (isVisible) {
+          item.style.display = 'block';
+          item.style.animation = 'fadeInUp 0.3s ease-out';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      // Update stats and show/hide no results
+      totalQuestions.textContent = visibleCount;
+      
+      if (visibleCount === 0 && searchTerm !== '') {
+        noResults.classList.add('show');
+        faqGrid.style.display = 'none';
+      } else {
+        noResults.classList.remove('show');
+        faqGrid.style.display = 'grid';
+      }
+    });
+
+    // Enhanced keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        // Close all FAQ items
+        document.querySelectorAll('.faq-item').forEach(item => {
+          item.classList.remove('active');
+        });
+        
+        // Clear search
+        searchInput.value = '';
+        searchInput.dispatchEvent(new Event('input'));
+      }
+      
+      if (e.key === '/' && !searchInput.matches(':focus')) {
+        e.preventDefault();
+        searchInput.focus();
+      }
+    });
+
+    // Add smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    // Animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, observerOptions);
+
+    // Observe FAQ items for stagger animation
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.faq-item').forEach(item => {
+        observer.observe(item);
+      });
+    });
+
+    // Add focus indicators for accessibility
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') {
+        document.body.classList.add('keyboard-navigation');
+      }
+    });
+
+    document.addEventListener('mousedown', function() {
+      document.body.classList.remove('keyboard-navigation');
+    });
+  </script>
+
+  <style>
+    /* Focus indicators for keyboard navigation */
+    .keyboard-navigation .faq-item:focus-within {
+      outline: 2px solid #4facfe;
+      outline-offset: 2px;
+    }
+
+    .keyboard-navigation .back-button a:focus {
+      outline: 2px solid #4facfe;
+      outline-offset: 4px;
+    }
+  </style>
+</body>
+</html>
